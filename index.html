@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kelola Uang Jajanmu!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>💸 Kelola Uang Jajanmu!</h1>
+    <p>Belajar ngatur uang jajan sejak dini, biar gak boros~</p>
+  </header>
+
+  <section>
+    <h2>📌 Tips Hemat Uang Jajan</h2>
+    <ul>
+      <li>Sisihkan 20% untuk ditabung setiap hari</li>
+      <li>Jangan jajan setiap hari 😅</li>
+      <li>Bedakan antara kebutuhan dan keinginan</li>
+      <li>Gunakan uang kertas besar agar tidak mudah jajan</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📊 Simulasi Uang Jajan</h2>
+    <p>Misal kamu dapat <strong>Rp10.000/hari</strong>, yuk atur kayak gini:</p>
+    <table>
+      <tr>
+        <th>Keperluan</th>
+        <th>Jumlah (Rp)</th>
+      </tr>
+      <tr>
+        <td>Jajan</td>
+        <td>5.000</td>
+      </tr>
+      <tr>
+        <td>Ditabung</td>
+        <td>3.000</td>
+      </tr>
+      <tr>
+        <td>Sisa</td>
+        <td>2.000</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>📝 Catatan Pengeluaran</h2>
+    <table>
+      <tr>
+        <th>Tanggal</th>
+        <th>Pengeluaran</th>
+        <th>Keterangan</th>
+      </tr>
+      <tr>
+        <td>5 Agustus</td>
+        <td>Rp2.000</td>
+        <td>Jajan es teh</td>
+      </tr>
+      <tr>
+        <td>6 Agustus</td>
+        <td>Rp3.000</td>
+        <td>Gorengan</td>
+      </tr>
+    </table>
+  </section>
+<section>
+  <h2>💰 Simulasi Keuangan Interaktif</h2>
+  <label>Masukkan uang jajan kamu (Rp):</label><br>
+  <input type="number" id="budget" placeholder="Contoh: 10000"><br><br>
+
+  <label>Pengeluaran 1 (misal jajan):</label><br>
+  <input type="number" id="pengeluaran1" placeholder="Contoh: 3000"><br><br>
+
+  <label>Pengeluaran 2 (misal tabungan):</label><br>
+  <input type="number" id="pengeluaran2" placeholder="Contoh: 2000"><br><br>
+
+  <button onclick="hitungSisa()">Hitung Sisa Uang</button><br><br>
+
+  <p><strong>Sisa uang kamu:</strong> <span id="hasil">-</span> Rupiah</p>
+</section>
+<script>
+  function hitungSisa() {
+    const budget = parseInt(document.getElementById("budget").value) || 0;
+    const pengeluaran1 = parseInt(document.getElementById("pengeluaran1").value) || 0;
+    const pengeluaran2 = parseInt(document.getElementById("pengeluaran2").value) || 0;
+
+    const totalPengeluaran = pengeluaran1 + pengeluaran2;
+    const sisa = budget - totalPengeluaran;
+
+    document.getElementById("hasil").innerText = sisa;
+  }
+</script>
+  <footer>
+    <p>&copy; 2025 Website Keuangan Pelajar SMP</p>
+  </footer>
+</body>
+</html>
