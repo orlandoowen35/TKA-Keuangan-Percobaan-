@@ -74,29 +74,123 @@
       </tr>
     </table>
   </section>
-  <section class="simulasi-container">
-  <h2>📊 Simulasi Keuangan Interaktif</h2>
-  <p>Masukkan uang jajanmu, atur pengeluaran, dan lihat sisa uang secara langsung!</p>
+  <meta charset="UTF-8">
+  <title>Simulasi & Catatan Keuangan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
 
- <section class="simulasi-container">
-    <h2>Simulasi Keuangan Interaktif</h2>
-    <p>Masukkan uang jajanmu, atur pengeluaran, dan lihat sisa uang secara langsung!</p>
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-    <div class="form-group">
+    .simulasi, .pengeluaran {
+      flex: 1;
+      min-width: 300px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      padding: 6px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .summary {
+      margin-top: 15px;
+      background: #f2f2f2;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    #hasil-sisa {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- SIMULASI -->
+    <div class="simulasi">
+      <h2>📊 Simulasi Keuangan Interaktif</h2>
+      <p>Masukkan uang jajanmu, atur pengeluaran, dan lihat sisa uang secara langsung!</p>
+
       <label for="uang-jajan">Uang Jajan:</label>
       <input type="number" id="uang-jajan" placeholder="Masukkan jumlah uang jajan">
-    </div>
 
-    <div class="form-group">
       <label for="pengeluaran">Pengeluaran:</label>
       <input type="number" id="pengeluaran" placeholder="Masukkan total pengeluaran">
+
+      <button onclick="hitungSisa()">Hitung Sisa Uang</button>
+      <h3 id="hasil-sisa"></h3>
     </div>
 
-    <button onclick="hitungSisa()">Hitung Sisa Uang</button>
-    <h3 id="hasil-sisa"></h3>
-  </section>
+    <!-- CATATAN -->
+    <div class="pengeluaran">
+      <h2>📝 Catatan Pengeluaran</h2>
+
+      <label>Total Uang Awal:</label>
+      <input type="number" id="totalUang" placeholder="Contoh: 500000">
+
+      <label>Nama Pengeluaran:</label>
+      <input type="text" id="namaPengeluaran" placeholder="Contoh: Makan siang">
+
+      <label>Jumlah Pengeluaran:</label>
+      <input type="number" id="jumlahPengeluaran" placeholder="Contoh: 25000">
+
+      <button onclick="tambahPengeluaran()">Tambah</button>
+
+      <h3>Daftar Pengeluaran:</h3>
+      <ul id="daftarPengeluaran"></ul>
+
+      <div class="summary">
+        <p><strong>Total Uang:</strong> Rp <span id="totalUangDisplay">0</span></p>
+        <p><strong>Total Terpakai:</strong> Rp <span id="totalTerpakai">0</span></p>
+        <p><strong>Sisa Uang:</strong> Rp <span id="sisaUang">0</span></p>
+      </div>
+    </div>
+  </div>
 
   <script>
+    // SIMULASI KEUANGAN
     function hitungSisa() {
       const jajan = parseInt(document.getElementById('uang-jajan').value) || 0;
       const keluar = parseInt(document.getElementById('pengeluaran').value) || 0;
@@ -111,9 +205,44 @@
         hasil.style.color = "green";
       }
     }
+
+    // CATATAN PENGELUARAN
+    let totalUang = 0;
+    let totalTerpakai = 0;
+
+    function updateDisplay() {
+      document.getElementById('totalUangDisplay').textContent = totalUang;
+      document.getElementById('totalTerpakai').textContent = totalTerpakai;
+      document.getElementById('sisaUang').textContent = totalUang - totalTerpakai;
+    }
+
+    document.getElementById('totalUang').addEventListener('change', function () {
+      totalUang = parseInt(this.value) || 0;
+      updateDisplay();
+    });
+
+    function tambahPengeluaran() {
+      const nama = document.getElementById('namaPengeluaran').value;
+      const jumlah = parseInt(document.getElementById('jumlahPengeluaran').value);
+
+      if (!nama || isNaN(jumlah)) {
+        alert("Isi nama dan jumlah pengeluaran!");
+        return;
+      }
+
+      const li = document.createElement('li');
+      li.textContent = `${nama} - Rp ${jumlah}`;
+      document.getElementById('daftarPengeluaran').appendChild(li);
+
+      totalTerpakai += jumlah;
+      updateDisplay();
+
+      // reset form
+      document.getElementById('namaPengeluaran').value = '';
+      document.getElementById('jumlahPengeluaran').value = '';
+    }
   </script>
 
-</script>
   <footer>
     <p>&copy; 2025 Website Keuangan Pelajar SMP by Orlando Owen T. IX E / 25</p>
   </footer>
