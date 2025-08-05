@@ -74,35 +74,42 @@
       </tr>
     </table>
   </section>
-<section>
-  <h2>💰 Simulasi Keuangan Interaktif</h2>
-  <label>Masukkan uang jajan kamu (Rp):</label><br>
-  <input type="number" id="budget" placeholder="Contoh: 10000"><br><br>
+  <section class="simulasi-container">
+  <h2>📊 Simulasi Keuangan Interaktif</h2>
+  <p>Masukkan uang jajanmu, atur pengeluaran, dan lihat sisa uang secara langsung!</p>
 
-  <label>Pengeluaran 1 (misal jajan):</label><br>
-  <input type="number" id="pengeluaran1" placeholder="Contoh: 3000"><br><br>
+  <div class="form-group">
+    <label for="uang-jajan">Uang Jajan:</label>
+    <input type="number" id="uang-jajan" placeholder="Masukkan jumlah uang jajan">
+  </div>
 
-  <label>Pengeluaran 2 (misal tabungan):</label><br>
-  <input type="number" id="pengeluaran2" placeholder="Contoh: 2000"><br><br>
+  <div class="form-group">
+    <label for="pengeluaran">Pengeluaran:</label>
+    <input type="number" id="pengeluaran" placeholder="Masukkan total pengeluaran">
+  </div>
 
-  <button onclick="hitungSisa()">Hitung Sisa Uang</button><br><br>
+  <button onclick="hitungSisa()">Hitung Sisa Uang</button>
 
-  <p><strong>Sisa uang kamu:</strong> <span id="hasil">-</span> Rupiah</p>
+  <h3 id="hasil-sisa"></h3>
 </section>
 <script>
   function hitungSisa() {
-    const budget = parseInt(document.getElementById("budget").value) || 0;
-    const pengeluaran1 = parseInt(document.getElementById("pengeluaran1").value) || 0;
-    const pengeluaran2 = parseInt(document.getElementById("pengeluaran2").value) || 0;
-
-    const totalPengeluaran = pengeluaran1 + pengeluaran2;
-    const sisa = budget - totalPengeluaran;
-
-    document.getElementById("hasil").innerText = sisa;
+    const jajan = parseInt(document.getElementById('uang-jajan').value) || 0;
+    const keluar = parseInt(document.getElementById('pengeluaran').value) || 0;
+    const sisa = jajan - keluar;
+    const hasil = document.getElementById('hasil-sisa');
   }
+    if (sisa < 0) {
+      hasil.innerText = `⚠️ Wah, kamu minus Rp ${Math.abs(sisa)}`;
+      hasil.style.color = "red";
+    } else {
+      hasil.innerText = `💰 Sisa uangmu: Rp ${sisa}`;
+      hasil.style.color = "green";
+    }
+</script>
 </script>
   <footer>
-    <p>&copy; 2025 Website Keuangan Pelajar SMP</p>
+    <p>&copy; 2025 Website Keuangan Pelajar SMP by Orlando Owen T. IX E / 25</p>
   </footer>
 </body>
 </html>
